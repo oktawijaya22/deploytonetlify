@@ -13,7 +13,7 @@ const EditPhoto = () => {
   const editPhoto = (e) => {
     e.preventDefault();
     // TODO: answer here
-    fetch(`https://gallery-app-server.vercel.app/photos' + id`, {
+    fetch(`https://gallery-app-server.vercel.app/photos/` + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -23,16 +23,19 @@ const EditPhoto = () => {
         captions: captions,
         updatedAt: "2022-11-28T04:31:16.956Z",
       }),
-    })
+    }).then((response) => {
+      response.json()
+      navigate(`/photos/`)
+    }).catch((error),setError(error))
   };
 
   useEffect(() => {
-    setLoading(true);
     // TODO: answer here
-    fetch('https://gallery-app-server.vercel.app/photos<photo id>')
+    fetch('https://gallery-app-server.vercel.app/photos/' + id)
       .then((response) => response.json())
       .then((json) => {
-        setPhotos(json)
+        setImageUrl(json.imageUrl)
+        setCaptions(json.captions)
         setLoading(false)
       });
   }, [id]);

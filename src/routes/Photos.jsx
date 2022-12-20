@@ -25,13 +25,15 @@ const Photos = () => {
 
   useEffect(() => {
     setLoading(true);
-    // TODO: answer here
-    fetch(`https://gallery-app-server.vercel.app/photos?_sort=id&_order=${sort}&q=${search}`)
+    try{
+      fetch(`https://gallery-app-server.vercel.app/photos?_sort=id&_order=${sort}&q=${search}`)
       .then((response) => response.json()) 
       .then((json) =>  {
         setPhotos(json)
         setLoading(false)
-      });
+      })
+    } catch(error){setError}
+    // TODO: answer here
   }, [sort, submited]);
 
   useEffect(() => {

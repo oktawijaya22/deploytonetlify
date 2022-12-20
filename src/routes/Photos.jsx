@@ -42,7 +42,7 @@ const Photos = () => {
       .then((json) => {
         setPhotos(json)
         setLoading(false)
-        setError(null)
+        setError(false)
       });
     
   }, []);
